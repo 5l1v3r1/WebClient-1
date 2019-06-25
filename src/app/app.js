@@ -35,6 +35,7 @@ function main(CONFIG) {
             'gettext',
             'cgNotify',
             'ngCookies',
+            'ngAria',
             'ngMessages',
             'ngSanitize',
             'ui.router',
@@ -61,28 +62,26 @@ function main(CONFIG) {
         .config((notificationProvider) => {
             notificationProvider.template(require('../templates/notifications/base.tpl.html'));
         })
-        .run(
-            (
-                logoutManager, // Keep the logoutManager here to lunch it
-                AppModel,
-                tools,
-                lazyLoader
-            ) => {
-                FastClick.attach(document.body);
+        .run((
+            logoutManager, // Keep the logoutManager here to lunch it
+            AppModel,
+            tools,
+            lazyLoader
+        ) => {
+            FastClick.attach(document.body);
 
-                lazyLoader.app();
+            lazyLoader.app();
 
-                // Manage responsive changes
-                window.addEventListener('resize', _.debounce(tools.mobileResponsive, 50));
-                window.addEventListener('orientationchange', tools.mobileResponsive);
-                tools.mobileResponsive();
+            // Manage responsive changes
+            window.addEventListener('resize', _.debounce(tools.mobileResponsive, 50));
+            window.addEventListener('orientationchange', tools.mobileResponsive);
+            tools.mobileResponsive();
 
-                AppModel.set('showWelcome', true);
+            AppModel.set('showWelcome', true);
 
-                // SVG Polyfill for IE11 @todo lazy load
-                svg4everybody();
-            }
-        )
+            // SVG Polyfill for IE11 @todo lazy load
+            svg4everybody();
+        })
 
         .config(($httpProvider) => {
             // Http Interceptor to check auth failures for xhr requests
@@ -151,7 +150,7 @@ function main(CONFIG) {
             $compileProvider.debugInfoEnabled(debugInfo);
             $qProvider.errorOnUnhandledRejections(debugInfo);
         });
-
-    angular.bootstrap(document, ['proton']);
+        angular.bootstrap(document, ['proton']);
 }
+
 export default main;
