@@ -105,7 +105,7 @@ function main(CONFIG) {
         .run(($state, authentication, $log, dispatchers, networkActivityTracker, AppModel) => {
             const { dispatcher, on } = dispatchers(['tooltip']);
 
-            on('$stateChangeStart', (event, toState) => {
+            on('$stateChangeStart', (event, toState, toStateParam) => {
                 const isLogin = toState.name === 'login';
                 const isSub = toState.name === 'login.sub';
                 const isUpgrade = toState.name === 'upgrade';
@@ -115,6 +115,33 @@ function main(CONFIG) {
                 const isOutside = toState.name.includes('eo');
                 const isReset = toState.name.includes('reset');
                 const isPgp = toState.name === 'pgp';
+
+                const settingsRoutes = [
+                    'dashboard',
+                    'account',
+                    'labels',
+                    'security',
+                    'appearance',
+                    'payments',
+                    'keys',
+                    'vpn',
+                    'members',
+                    'domains',
+                    'bridge',
+                    'pmme',
+                    'filters',
+                    'autoresponder'
+                ];
+
+                const settingRoute = settingsRoutes.find((route) => toState.name.includes(route));
+                if (settingRoute) {
+                    return document.location.assign(`${document.location.origin}/settings/${settingRoute}`);
+                }
+
+                if (toState.name.includes('.contacts')) {
+                    const url = ['contacts', toStateParam.id].filter(Boolean).join('/');
+                    return document.location.assign(`${document.location.origin}/${url}`);
+                }
 
                 if (isLogin || isSub || isSupport || isAccount || isSignup) {
                     return; // no need to redirect
@@ -151,6 +178,7 @@ function main(CONFIG) {
             $qProvider.errorOnUnhandledRejections(debugInfo);
         });
         angular.bootstrap(document, ['proton']);
+
 }
 
 export default main;
