@@ -135,6 +135,8 @@ function main(CONFIG) {
 
                 const settingRoute = settingsRoutes.find((route) => toState.name.includes(route));
                 if (settingRoute) {
+                    // we have a redirection ex: upgrade storage -> /dashboard to upgrade plans, now in /subsbscription
+                    const route = settingRoute === 'dashboard' ? 'subscription' : 'settingRoute;';
                     return document.location.assign(`${document.location.origin}/settings/${settingRoute}`);
                 }
 
@@ -177,8 +179,8 @@ function main(CONFIG) {
             $compileProvider.debugInfoEnabled(debugInfo);
             $qProvider.errorOnUnhandledRejections(debugInfo);
         });
-        angular.bootstrap(document, ['proton']);
 
+        angular.bootstrap(document, ['proton']);
 }
 
 export default main;
