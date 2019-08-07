@@ -7,6 +7,7 @@ import hideUpgrade from './directives/hideUpgrade';
 import placeholderProgress from './directives/placeholderProgress';
 import bugModalView from './directives/bugModalView';
 import accountLoadError from './directives/accountLoadError';
+import asideSidebar from './directives/asideSidebar';
 import newVersion from './directives/newVersion';
 import formatResponseInterceptor from './interceptors/formatResponseInterceptor';
 import serverTimeInterceptor from './interceptors/serverTimeInterceptor';
@@ -47,6 +48,7 @@ export default angular
     .directive('hideUpgrade', hideUpgrade)
     .directive('placeholderProgress', placeholderProgress)
     .directive('bugModalView', bugModalView)
+    .directive('asideSidebar', asideSidebar)
     .directive('newVersion', newVersion)
     .directive('signupIframe', signupIframe)
     .directive('accountLoadError', accountLoadError)
