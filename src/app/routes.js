@@ -484,6 +484,9 @@ export default angular
                     },
                     premiums(user, premiumDomainModel) {
                         return premiumDomainModel.fetch();
+                    },
+                    methods(user, paymentModel, networkActivityTracker) {
+                        return networkActivityTracker.track(paymentModel.getMethods(null, user));
                     }
                 },
                 onEnter(AppModel, $state, authentication) {
