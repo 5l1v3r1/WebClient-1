@@ -24,7 +24,13 @@ function isDelinquent($state, gettextCatalog, notification, authentication, tran
         if (!authentication.user.Keys.length) {
             return $state.go('login.setup');
         }
-        return $state.go(state).then(() => {
+
+        if (!state) {
+            window.location.href = '/settings';
+            return;
+        }
+
+        $state.go(state).then(() => {
             /**
              * Show the notification once all the promises has been resolved.
              * Otherwise it is closed by the network activity tracker.
