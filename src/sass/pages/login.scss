@@ -53,3 +53,8 @@ body#reset {
 }
 
 .loginForm-btn-oldversion::before { content: url('#hostURL2#'); }
+
+
+[id="support-reset-password"] {
+    overflow: initial !important;
+}
