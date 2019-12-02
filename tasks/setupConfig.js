@@ -7,6 +7,7 @@ const dedent = require('dedent');
 const execa = require('execa');
 const localIp = require('my-local-ip');
 const portfinder = require('portfinder'); // Coming from webpack-dev-server
+const { success } = require('./helpers/log.js'); // Coming from webpack-dev-server
 
 // Default PORT for webpack
 portfinder.basePort = 8080;
@@ -20,6 +21,7 @@ if (env.argv['print-config']) {
 }
 
 fs.writeFileSync(PATH_CONFIG, `export default ${JSON.stringify(CONFIG, null, 4)};`);
+success(`generated ${PATH_CONFIG}`);
 /**
  * Fuck you webpack
  * thx https://github.com/webpack/watchpack/issues/25#issuecomment-357483744
