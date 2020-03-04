@@ -41,6 +41,9 @@
         background: transparent;
         color: currentColor;
         border: 0;
+        &.color-white {
+            color: $white;
+        }
     }
     [class*="-btn-"]:active { color: $primary }
     [class*="-btn-"]:focus { outline: 1px solid grey }
