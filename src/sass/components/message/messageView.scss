@@ -444,7 +444,8 @@
     }
 
     blockquote {
-        @extend [class*="block-info"], [class*="block-info-standard"], .block-info-standard
+        @extend [class*="block-info"], [class*="block-info-standard"], .block-info-standard;
+        color: $pm-global-grey;
     }
 }
 
