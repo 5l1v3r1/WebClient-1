@@ -36,27 +36,33 @@ drun_node() {
         node:lts $@
 }
 
-echo '=> Assuming repo is configured according to ./README.md#Config'
-echo "=> Bundling app..."
-subprojects_opts=''
-if [ ! -r '../proton-mail-settings/package.json' ]; then
-    echo '~> using --remote-setting as no local source found at ../proton-mail-settings'
-    subprojects_opts="${subprojects_opts} --remote-pm-settings"
-fi
-if [ ! -r '../proton-contacts/package.json' ]; then
-    echo '~> using --remote-contacts as no local source found at ../proton-contacts'
-    subprojects_opts="${subprojects_opts} --remote-contacts"
-fi
-if [ ! -r '../proton-calendar/package.json' ]; then
-    echo '~> using --remote-calendar as no local source found at ../proton-calendar'
-    subprojects_opts="${subprojects_opts} --remote-calendar"
-fi
-if [ "${NO_BUNDLE:-}" ]; then
-    echo '~> skipped.'
-elif (command -v node > /dev/null); then
-    clock npm run bundle -- --api=proxy ${subprojects_opts:-}
+if ! [ -f 'webapp-bundle.tar.gz' ]; then
+    echo '=> Assuming repo is configured according to ./README.md#Config'
+    echo "=> Bundling app..."
+    subprojects_opts=''
+    if [ ! -r '../proton-mail-settings/package.json' ]; then
+        echo '~> using --remote-setting as no local source found at ../proton-mail-settings'
+        subprojects_opts="${subprojects_opts} --remote-pm-settings"
+    fi
+    if [ ! -r '../proton-contacts/package.json' ]; then
+        echo '~> using --remote-contacts as no local source found at ../proton-contacts'
+        subprojects_opts="${subprojects_opts} --remote-contacts"
+    fi
+    if [ ! -r '../proton-calendar/package.json' ]; then
+        echo '~> using --remote-calendar as no local source found at ../proton-calendar'
+        subprojects_opts="${subprojects_opts} --remote-calendar"
+    fi
+    if [ "${NO_BUNDLE:-}" ]; then
+        echo '~> skipped.'
+    elif (command -v node > /dev/null); then
+        clock npm run bundle -- --api=proxy ${subprojects_opts:-}
+    else
+        clock drun_node npm run bundle -- --api=proxy ${subprojects_opts:-}
+    fi
 else
-    clock drun_node npm run bundle -- --api=proxy ${subprojects_opts:-}
+    echo '=> There is a bundle already available'
+    mkdir dist
+    tar xzf webapp-bundle.tar.gz -C dist
 fi
 
 image_name="${CI_REGISTRY_IMAGE}/dist"

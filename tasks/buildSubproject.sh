@@ -142,9 +142,22 @@ function addSubProject {
     log "[build.project] npm run bundle -- $MAIN_ARGS --verbose"
     npm --no-color run bundle -- $MAIN_ARGS --no-lint --verbose
 
+
+    # When we build from the CI we can split the build/job as it's faster
+    # We have 2 options:
+    #   --run-project all -> build Angular + calendar + contacts + settings
+    #   --run-project <project> -> build only <project>
+    #
+    # With the 2sd option we can choose to build only one project instead of 4.
+    # So we do not need ot move the output dist directory inside the WebClient's output dist directory; that's something done by the CI.
+    # Idem we will manage the htacess via the CI
+    if [[ "$ARGS" =~ --run-project ]] && [[ ! "$ARGS" =~ --run-project=all ]]; then
+        cp -r dist "$WEBCLIENT_DIR/dist";
+        return 0;
+    fi;
+
     log "[build.project] Remove .htaccess to prevent directory listing";
     rm -rf dist/.htaccess || echo
-
     log "[build.project] Copy from $(pwd)/dist/ to $WEBCLIENT_DIR/$1";
     cp -r dist/ "$WEBCLIENT_DIR/$1";
 }
