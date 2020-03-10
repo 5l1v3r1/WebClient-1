@@ -19,7 +19,10 @@ function extractDataURI(attachmentModel, embedded) {
         const [mimeString, encoding] = mime.split(':')[1].split(';');
         // write the bytes of the string to an ArrayBuffer
         const data =
-            encoding === 'base64' ? openpgp.util.b64_to_Uint8Array(byte) : openpgp.util.str_to_Uint8Array(byte);
+            encoding === 'base64'
+                ? openpgp.util.b64_to_Uint8Array(byte)
+                : openpgp.util.str_to_Uint8Array(decodeURIComponent(byte));
+
         // write the ArrayBuffer to a blob, and you're done
         return new Blob([data], { type: mimeString });
     }
