@@ -4,3 +4,20 @@
 .dropDown-content--advancedSearch::before {
     border-bottom: 1rem solid var(--bgcolor-main-area, #f5f5f5);
 }
+
+// quick and dirty fix for Angular for having search on mobile
+@include respond-to($breakpoint-small) {
+    .searchbox-advanced-search-button {
+       .dropdownButton-container {
+           padding-right: .5rem;
+       }
+       &:focus,
+       &:hover {
+            background: transparent;
+            .btnAdvancedSearch-icon-desktop-mobile {
+                color: var(--color-nav-active, $pm-primary);
+            }
+        }
+    }
+
+}
