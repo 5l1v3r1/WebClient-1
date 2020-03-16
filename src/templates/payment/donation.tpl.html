@@ -100,31 +100,38 @@
             ng-model="model.method"
             ng-options="method.label for method in methods"></select>
     </div>
-    <p
-        ng-if="model.method.value === 'cash'"
-        class="donationForm-about-cash block-info-standard-warning"
-        translate-context="Info"
-        translate>To pay via Cash, please email us at <strong>contact@protonmail.com</strong> for instructions.</p>
 
-    <card-view
-        ng-if="model.method.value === 'card'"
-        class="donationForm-cardView w70 mauto"
-        data-card="model.card"
-        data-form="donationForm"></card-view>
+    <div class="donationForm-paymentMethod flex flex-nowrap onmobile-flex-column mb2 ">
+        <span class="w33"></span>
+        <div class="w40 flex">
+            <p
+            ng-if="model.method.value === 'cash'"
+            class="donationForm-about-cash block-info-standard-warning"
+            translate-context="Info"
+            translate>To pay via Cash, please email us at <strong>contact@protonmail.com</strong> for instructions.</p>
 
-    <paypal-view
-        ng-if="model.method.value === 'paypal' && !donationForm.otherAmount.$error.max"
-        data-type="{{::type}}"
-        data-amount="getAmount()"
-        data-currency="model.currency.value"
-        data-callback="paypalCallback"></paypal-view>
+            <card-view
+                ng-if="model.method.value === 'card'"
+                class="donationForm-cardView mauto onmobile-w100"
+                data-card="model.card"
+                data-form="donationForm"></card-view>
 
-    <bitcoin-view
-        ng-if="model.method.value === 'bitcoin'"
-        class="donateModal-bitcoin"
-        data-type="{{::type}}"
-        data-currency="model.currency.value"
-        data-amount="getAmount()"></bitcoin-view>
+            <paypal-view
+                ng-if="model.method.value === 'paypal' && !donationForm.otherAmount.$error.max"
+                data-type="{{::type}}"
+                data-amount="getAmount()"
+                data-currency="model.currency.value"
+                data-callback="paypalCallback"></paypal-view>
+
+            <bitcoin-view
+                ng-if="model.method.value === 'bitcoin'"
+                class="donateModal-bitcoin"
+                data-type="{{::type}}"
+                data-currency="model.currency.value"
+                data-amount="getAmount()"></bitcoin-view>
+        </div>
+    </div>
+
 
     <footer class="aligncenter spacing-top donationForm-footer">
         <button
