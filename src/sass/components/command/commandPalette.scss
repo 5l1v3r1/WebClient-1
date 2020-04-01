@@ -9,7 +9,7 @@
     height: 280px;
     padding: 2.5rem;
     margin: auto;
-    background: white;
+    background: var(--bgcolor-main-area, $white);
     border-radius: .2em;
     transform: translateY(-50%);
 }
@@ -38,7 +38,7 @@
         display: flex;
         align-items: center;
         flex: 1;
-        background: #eee;
+        background: var(--bgcolor-main-area, #eee);
 
     }
 
