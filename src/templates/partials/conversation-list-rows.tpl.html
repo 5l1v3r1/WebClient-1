@@ -20,17 +20,19 @@
             <div class="flex-item-fluid flex mauto">
                 <span class="flex flex-items-center" ng-attr-title="{{ conversation.Subject | unescape }}">
                     <span class="flex-item-fluid flex flex-nowrap">
+                        <icon
+                            data-name="expiration"
+                            data-no-fill="true"
+                            data-size="12"
+                            class="mtauto mbauto color-global-warning conversation-icon-expiration mr0-25"></icon>
                         <states-elements></states-elements>
                         <folders-element conversation="conversation"></folders-element>
-                        <span class="subject-num-message mr0-25 flex-item-noshrink" ng-if="conversation.NumMessages > 1">({{ conversation.NumMessages }})</span>
+                        <span class="subject-num-message mr0-25 flex-item-noshrink" ng-if="conversation.NumMessages > 1">[{{ conversation.NumMessages }}]</span>
                         <span class="subject-text flex-item-fluid ellipsis">{{ conversation.Subject  | unescape }}</span>
                     </span>
 
                     <labels-element element="conversation"></labels-element>
-                    <icon
-                        data-name="expiration"
-                        data-fill="global-warning"
-                        class="mtauto mbauto conversation-icon-expiration ml0-5"></icon>
+
                     <icon
                         data-name="attach"
                         class="mtauto mbauto conversation-icon-attachment ml0-5"></icon>
@@ -38,7 +40,7 @@
             </div>
             <span class="mtauto mbauto mr1 ml1">{{ size(conversation)| bytes }}</span>
             <span class="mauto"><time-element></time-element></span>
-            <div class="mauto">
+            <div class="mauto flex">
                 <pt-star
                     data-model="conversation"
                     class="singleStar ml0-25"></pt-star>

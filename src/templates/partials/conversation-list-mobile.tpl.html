@@ -15,18 +15,7 @@
 
             <select-box-element class="mr1"></select-box-element>
             <div class="flex-item-fluid flex flex-column flex-spacebetween item-titlesender">
-                <div class="flex mw100">
-                    <div class="subject flex-item-fluid flex flex-nowrap w0 pr1" ng-attr-title="{{ conversation.Subject | unescape }}">
-                        <states-elements></states-elements>
-                        <folders-element data-conversation="conversation"></folders-element>
-                        <span class="subject-num-message mr0-25 flex-item-noshrink" ng-if="conversation.NumMessages > 1">({{ conversation.NumMessages }})</span>
-                        <span class="subject-text inbl mw100 ellipsis">{{ conversation.Subject | unescape }}</span>
-                    </div>
-                    <span class="meta">
-                        <time-element></time-element>
-                    </span>
-                </div>
-                <div class="flex mw100">
+                <div class="flex flex flex-items-center item-firstline mw100">
                     <span
                     class="senders flex flex-item-fluid pr1"
                     ng-class="{ 'full': !hasLabels(conversation) }">
@@ -34,20 +23,32 @@
                             <senders-name></senders-name>
                         </span>
                     </span>
-                    <div class="conversation-icons">
-                        <labels-element data-element="conversation"></labels-element>
-                        <icon
-                            data-name="expiration"
-                            data-fill="global-warning"
-                            class="mauto conversation-icon-expiration"></icon>
-                        <icon
-                            data-name="attach"
-                            class="mauto conversation-icon-attachment"></icon>
+                    <div class="item-date flex-item-noshrink"><time-element></time-element></div>
+                    <div class="conversation-icons flex flex-items-center">
                         <pt-star
                             data-model="conversation"
-                            class="singleStar"></pt-star>
+                            class="singleStar ml0-5"></pt-star>
                     </div>
 
+                </div>
+                <div class="flex flex-items-center item-secondline mw100">
+                    <icon
+                        data-name="expiration"
+                        data-no-fill="true"
+                        data-size="12"
+                        class="mtauto mbauto color-global-warning mr0-25 conversation-icon-expiration"></icon>
+                    <div class="subject flex-item-fluid flex flex-nowrap w0 pr1" ng-attr-title="{{ conversation.Subject | unescape }}">
+                        <states-elements></states-elements>
+                        <folders-element data-conversation="conversation"></folders-element>
+                        <span class="subject-num-message item-sender--smaller mr0-25 flex-item-noshrink" ng-if="conversation.NumMessages > 1">[{{ conversation.NumMessages }}]</span>
+                        <span class="subject-text item-sender--smaller inbl mw100 ellipsis">{{ conversation.Subject | unescape }}</span>
+                    </div>
+                    <div class="conversation-icons flex">
+                        <labels-element data-element="conversation"></labels-element>
+                        <icon
+                            data-name="attach"
+                            class="mtauto mbauto ml0-5 conversation-icon-attachment"></icon>
+                    </div>
                 </div>
             </div>
         </div>
