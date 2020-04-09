@@ -63,10 +63,13 @@ function squireEditor(dispatchers, editorModel, sanitize, AppModel) {
         const head = doc.head || doc.getElementsByTagName('head')[0];
         const style = doc.createElement('style');
 
-        const colorsVariations = (colorStandard, colorDarkmode) => {
-            // no dark mode adaptation for Composer in HTML, while waiting a better solution
-            return colorStandard;
-        };
+        // no dark mode adaptation for Composer in HTML, while waiting a better
+        // const colorsVariations = (colorStandard, colorDarkmode) => {
+        //     if (AppModel.is('darkmode')) {
+        //          return colorDarkmode;
+        //     }
+        //     return colorStandard;
+        // };
 
         const css = `
             html {
@@ -80,8 +83,8 @@ function squireEditor(dispatchers, editorModel, sanitize, AppModel) {
                 font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
                 font-size: 14px;
                 line-height: 1.65em;
-                color: ${colorsVariations('#222', '#fff')};
-                background: ${colorsVariations('#fff', '#3c414e')};
+                color: #222;
+                background: #fff;
                 /* to fix, CSS var are not passing through the iframe */
                 word-wrap: break-word;
             }
