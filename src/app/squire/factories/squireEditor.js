@@ -8,7 +8,7 @@ import { getChildrenElements } from '../../../helpers/domHelper';
 const { IFRAME_CLASS } = DEFAULT_SQUIRE_VALUE;
 
 /* @ngInject */
-function squireEditor(dispatchers, editorModel, sanitize, AppModel) {
+function squireEditor(dispatchers, editorModel, sanitize) {
     const CACHE = {};
 
     const { dispatcher } = dispatchers(['squire.editor']);
