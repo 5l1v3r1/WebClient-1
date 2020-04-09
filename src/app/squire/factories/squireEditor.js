@@ -64,9 +64,7 @@ function squireEditor(dispatchers, editorModel, sanitize, AppModel) {
         const style = doc.createElement('style');
 
         const colorsVariations = (colorStandard, colorDarkmode) => {
-            if (AppModel.is('darkmode')) {
-                return colorDarkmode;
-            }
+            // no dark mode adaptation for Composer in HTML, while waiting a better solution
             return colorStandard;
         };
 
