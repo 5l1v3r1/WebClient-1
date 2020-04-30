@@ -53,6 +53,7 @@ API="${API_FLAG:-build}";
 SETTINGS_DIST_DIR="dist/settings";
 CONTACTS_DIST_DIR="dist/contacts";
 CALENDAR_DIST_DIR="dist/calendar";
+DRIVE_DIST_DIR="dist/drive";
 GIT_SUBPROJECT_URL="";
 ARGS="$*";
 
@@ -78,6 +79,11 @@ function checkEnv {
 
     if [ "$1" = 'calendar' ] &&  [ -z "$CALENDAR_GIT" ]; then
         echo '[env] Missing variable CALENDAR_GIT inside your env'
+        exit 1;
+    fi;
+
+    if [ "$1" = 'drive' ] &&  [ -z "$DRIVE_DIST_DIR" ]; then
+        echo '[env] Missing variable DRIVE_DIST_DIR inside your env'
         exit 1;
     fi;
 }
@@ -175,6 +181,14 @@ if [[ "$*" == *--deploy-subproject=calendar* ]]; then
     GIT_SUBPROJECT_URL="$CALENDAR_GIT";
     loadProject "--remote-calendar" "${CALENDAR_APP:-proton-calendar}";
     addSubProject "$CALENDAR_DIST_DIR";
+fi
+
+if [[ "$*" == *--deploy-subproject=drive* ]]; then
+    log "[build] drive"
+    checkEnv 'drive'
+    GIT_SUBPROJECT_URL="$DRIVE_GIT";
+    loadProject "--remote-drive" "${DRIVE_APP:-proton-drive}";
+    addSubProject "$DRIVE_DIST_DIR";
 fi
 
 echo -e "\n" >> build.log

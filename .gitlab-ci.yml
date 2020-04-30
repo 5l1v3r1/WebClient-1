@@ -32,6 +32,8 @@ bundle:
           artifacts: true
         - job: bundle-settings
           artifacts: true
+        - job: bundle-drive
+          artifacts: true
     artifacts:
         expire_in: 1 days
         paths:

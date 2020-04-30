@@ -240,6 +240,18 @@ function main(argv) {
                     }
                 },
                 {
+                    title: `Build the drive application ${suffixRemote('drive')}`,
+                    skip() {
+                        if (!argv.v4 || argv.drive === false) {
+                            return 'Flag --no-drive inside the command.';
+                        }
+                    },
+                    task() {
+                        const args = process.argv.slice(3);
+                        return bash('npm', ['run', 'build:subproject', '--', '--deploy-subproject=drive', ...args]);
+                    }
+                },
+                {
                     title: 'Generate the changelog',
                     enabled: () => !isCI,
                     task(ctx) {
