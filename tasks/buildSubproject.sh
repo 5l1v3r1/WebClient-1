@@ -111,7 +111,7 @@ function loadProject {
         cd "/tmp/$2";
 
         log "[config.project] load from /tmp/$2"
-        /tmp/app-config/install "/tmp/$2" --new --verbose
+        /tmp/app-config/install "/tmp/$2" --new --verbose --ignore-auto-pull
         log "[config.project] loaded"
         return 0;
     fi
