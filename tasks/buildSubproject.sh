@@ -93,7 +93,7 @@ function getRemote {
     rm -rf "/tmp/$1" || echo true;
     log "[clone] from $GIT_SUBPROJECT_URL $(pwd)/$1"
     # --> Main branch is develop
-    git clone --depth 1 "$GIT_SUBPROJECT_URL" "$1" --branch master;
+    git clone --depth 1 "$GIT_SUBPROJECT_URL" "$1" --branch "${GIT_SUBPROJECT_BRANCH:-master}";
 }
 
 function loadProject {
