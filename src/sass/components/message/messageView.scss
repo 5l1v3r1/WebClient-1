@@ -2,14 +2,6 @@
     @include flexColumn();
 }
 
-.message-container.sent:not(.draft) .message-summary {
-    @extend .is-outbound
-
-}
-.message-container:not(.sent):not(.draft) .message-summary {
-    @extend .is-inbound
-}
-
 .message-container.draft {
     border-color: var(--bgcolor-main-area, $pm-global-muted);
     .mailboxitem-folder { display: none }
