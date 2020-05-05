@@ -1,2 +1,6 @@
 /* context */
 .hasElementsSelected [id="conversation-view"] { display: none !important }
+
+.item-wrapper {
+    border-right: 1px solid var(--bordercolor-input, $pm-global-border);
+}
