@@ -91,7 +91,7 @@ function checkEnv {
 function getRemote {
     cd /tmp;
     rm -rf "/tmp/$1" || echo true;
-    log "[clone] from $GIT_SUBPROJECT_URL $(pwd)/$1"
+    log "[clone] from $GIT_SUBPROJECT_URL {"${GIT_SUBPROJECT_BRANCH:-master}"} $(pwd)/$1"
     # --> Main branch is develop
     git clone --depth 1 "$GIT_SUBPROJECT_URL" "$1" --branch "${GIT_SUBPROJECT_BRANCH:-master}";
 }
@@ -133,7 +133,14 @@ function addSubProject {
 
     # If you build from locales we don't want to remove the node_modules
     if [ ! -d "./node_modules" ]; then
-        npm ci --no-color --no-audit;
+
+        if [ -s 'package-lsock.json' ]; then
+            log "[install.project] npm ci"
+            npm ci --no-color --no-audit;
+        else
+            log "[install.project] npm i"
+            npm i --no-color --no-audit;
+        fi
     fi;
 
     log "[build.project] npm run bundle -- $MAIN_ARGS --verbose"
