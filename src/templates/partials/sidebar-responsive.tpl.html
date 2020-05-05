@@ -1,43 +1,52 @@
 <section class="pm_opensans sidebar no-scroll flex w100 flex-column flex-nowrap sidebarApp-container noprint">
     <sidebar-mobile-header class="sidebarApp-about-app flex-item-noshrink p1 bg-global-grey"></sidebar-mobile-header>
-    <div class="flex w100 flex-column flex-nowrap onmobile-flex-column scroll-if-needed navigation mw100 flex customScrollBar-container js-sidebar-container">
-
+    <div
+        class="flex w100 flex-column flex-nowrap onmobile-flex-column scroll-if-needed navigation mw100 flex customScrollBar-container js-sidebar-container"
+    >
         <nav class="navigation mw100 flex flex-column flex-item-noshrink flex-item-fluid js-navigation flex-nowrap">
-        <ul class="navigation__list unstyled flex-item-noshrink mb0 mt0">
-            <navigation-item
-                class="sidebarApp-item navigation__item"
-                data-key="{{::state}}"
-                ng-repeat="state in listStates track by $id(state)"></navigation-item>
+            <ul class="navigation__list unstyled flex-item-noshrink mb0 mt0">
+                <navigation-item
+                    class="sidebarApp-item navigation__item"
+                    data-key="{{::state}}"
+                    ng-repeat="state in listStates track by $id(state)"
+                ></navigation-item>
                 <li class="sidebarApp-divider" aria-hidden="true" ng-if="isFree"></li>
                 <li class="sidebarApp-item navigation__item" ng-if="isFree">
                     <a title="Upgrade" href="/settings" class="navigation__link w100">
                         <span class="flex flex-nowrap">
-                            <icon data-name="upgrade-to-paid" fill="currentColor" class="navigation__icon mr0-5 mtauto mbauto"></icon>
+                            <icon
+                                data-name="upgrade-to-paid"
+                                fill="currentColor"
+                                class="navigation__icon mr0-5 mtauto mbauto"
+                            ></icon>
                             <span translate-context="Title" translate-comment="Folder name" translate>Upgrade</span>
                         </span>
                     </a>
                 </li>
                 <li class="sidebarApp-divider" aria-hidden="true"></li>
-        </ul>
-        <ul class="menu sidebarApp-menu flex-item-noshrink unstyled mt0 mb2" id="labelSettings">
-            <li class="navigation__item">
-                <a href="/settings/labels" class="navigation__link w100">
-                    <span class="inline-flex flex-nowrap mw100">
-                        <icon data-name="settings-singular" class="navigation__icon flex-item-noshrink mr0-5 mtauto mbauto"></icon>
-                        <span
-                            id="tour-label-settings"
-                            class="sidebarApp-label mtauto mbauto ellipsis flex-item-fluid"
-                            translate-context="Action"
-                            translate>Folders / Labels</span>
-                    </span>
-                </a>
-            </li>
-        </ul>
+            </ul>
+            <ul class="menu sidebarApp-menu flex-item-noshrink unstyled mt0 mb2" id="labelSettings">
+                <li class="navigation__item">
+                    <a href="/settings/labels" class="navigation__link w100">
+                        <span class="inline-flex flex-nowrap mw100">
+                            <icon
+                                data-name="settings-singular"
+                                class="navigation__icon flex-item-noshrink mr0-5 mtauto mbauto"
+                            ></icon>
+                            <span
+                                id="tour-label-settings"
+                                class="sidebarApp-label mtauto mbauto ellipsis flex-item-fluid"
+                                translate-context="Action"
+                                translate
+                                >Folders / Labels</span
+                            >
+                        </span>
+                    </a>
+                </li>
+            </ul>
 
-
-        <sidebar-labels class="flex-item-noshrink"></sidebar-labels>
+            <sidebar-labels class="flex-item-noshrink"></sidebar-labels>
         </nav>
-
     </div>
     <nav class="flex-item-noshrink bg-global-grey p1 mtauto">
         <ul class="unstyled m0 flex flex-row">
@@ -57,6 +66,12 @@
                 <a title="Calendar" href="/calendar" class="aside-link inline-flex">
                     <icon name="protoncalendar" no-fill="true" class="aside-linkIcon mauto" />
                     <span class="sr-only" translate translate-context="Action">Calendar</span>
+                </a>
+            </li>
+            <li class="flex-item-fluid aligncenter" ng-if="hasDrive">
+                <a title="Drive" href="/drive" class="aside-link inline-flex">
+                    <icon name="protondrive" no-fill="true" class="aside-linkIcon mauto" />
+                    <span class="sr-only" translate translate-context="Action">Drive</span>
                 </a>
             </li>
         </ul>

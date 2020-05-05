@@ -1,3 +1,5 @@
+import CONFIG from '../../config';
+
 /* @ngInject */
 function asideSidebar() {
     return {
@@ -5,7 +7,9 @@ function asideSidebar() {
         restrict: 'E',
         templateUrl: require('../../../templates/layout/asideSidebar.tpl.html'),
         scope: {},
-        link() {}
+        link(scope) {
+            scope.hasDrive = CONFIG.featureFlags.includes('drive');
+        }
     };
 }
 

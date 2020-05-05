@@ -1,3 +1,5 @@
+import CONFIG from '../../config';
+
 /* @ngInject */
 const sidebarMobile = (sidebarModel, dispatchers, authentication, AppModel, userType) => ({
     replace: true,
@@ -5,6 +7,8 @@ const sidebarMobile = (sidebarModel, dispatchers, authentication, AppModel, user
     templateUrl: require('../../../templates/partials/sidebar-responsive.tpl.html'),
     link(scope) {
         const { on, unsubscribe } = dispatchers();
+
+        scope.hasDrive = CONFIG.featureFlags.includes('drive');
 
         const setUserType = () => {
             const { isAdmin, isFree } = userType();
