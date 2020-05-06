@@ -134,7 +134,7 @@ function addSubProject {
     # If you build from locales we don't want to remove the node_modules
     if [ ! -d "./node_modules" ]; then
 
-        if [ -s 'package-lsock.json' ]; then
+        if [ -s 'package-lock.json' ]; then
             log "[install.project] npm ci"
             npm ci --no-color --no-audit;
         else
