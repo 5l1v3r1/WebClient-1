@@ -5,13 +5,13 @@ function sidebarProgress(authentication, $filter) {
     const percentageValue = () => percentage(authentication.user.UsedSpace, authentication.user.MaxSpace);
     const colorModifierClass = (percentValue) => {
         if (percentValue < 60) {
-            return 'circle-bar--global-success';
+            return 'circle-bar--low';
         }
         if (percentValue < 80) {
-            return 'circle-bar--global-attention';
+            return 'circle-bar--medium';
         }
         if (percentValue >= 80) {
-            return 'circle-bar--global-warning';
+            return 'circle-bar--full';
         }
     };
 
