@@ -25,17 +25,18 @@ function isDelinquent($state, gettextCatalog, notification, authentication, tran
             return $state.go('login.setup');
         }
 
-        if (!state) {
-            window.location.href = '/settings';
-            return;
-        }
+        notification.error(message);
 
-        $state.go(state).then(() => {
-            /**
-             * Show the notification once all the promises has been resolved.
-             * Otherwise it is closed by the network activity tracker.
-             */
-            notification.error(message);
+        return new Promise(() => {
+            // Redirect after a timeout to show the notification
+            setTimeout(() => {
+                // Intentionally return a promise that never resolves so that the user stays on the current page
+                if (state === 'secured.payments') {
+                    window.location.href = '/settings/subscription';
+                    return;
+                }
+                return $state.go(state);
+            }, 2500);
         });
     };
 
